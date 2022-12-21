@@ -1,5 +1,9 @@
 import React  from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import './SingleMovie.css';
+import Navbar from '../components/Navbar';
+ 
+const API_IMG = "https://image.tmdb.org/t/p/w500/";
 
 const SingleMovie = () => {
   const {id} = useParams();
@@ -19,12 +23,21 @@ const SingleMovie = () => {
     getMovie()
   },[id])
   if (!movie){
-    return <h2 className='section-title'> no movie to display</h2>
+    return <h2> no movie to display</h2>
   }
   return (
+    <>
+    <Navbar />
+    <Link to ="/">Home</Link>
     <section>
+    <img src={API_IMG+movie.poster_path} alt="movie poster" className='info-img'></img>
+      <div className='movie-info'>
       <h2 className="section-title">{movie.title}</h2>
+      <p>{movie.overview}</p>
+      <p>{movie.release_date}</p>
+      </div>
     </section>
+    </>
   );
 }
 
