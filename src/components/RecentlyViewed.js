@@ -1,22 +1,17 @@
 import React from "react";
+import MovieBox from "../components/MovieBox"; 
 
-const RecentlyViewed = ({ recentlyViewedMovies }) => {
-  const addToRecentlyViewed = (id) => {
-    addToRecentlyViewed(id);
-  };
-
+function RecentlyViewed({ recentlyViewedMovies, addToRecentlyViewed }) { 
   return (
     <div className="recently-viewed">
       <h2>Recently Viewed</h2>
-      <ul>
+      <div className="grid">
         {recentlyViewedMovies.map((movie) => (
-          <li key={movie.id} onClick={() => addToRecentlyViewed(movie.id)}>
-            {movie.original_title}
-          </li>
+          <MovieBox key={movie.id} {...movie} addToRecentlyViewed={addToRecentlyViewed} /> 
         ))}
-      </ul>
+      </div>
     </div>
   );
-};
+}
 
 export default RecentlyViewed;

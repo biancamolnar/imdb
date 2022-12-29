@@ -1,3 +1,14 @@
+.home-btn {
+    color: white;
+    padding: 0.5rem;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: black;
+    margin-left: 3rem;
+    font-size: 20px;
+}
+
 section {
     display: flex;
     border: 1px solid white;
@@ -13,4 +24,12 @@ section {
 
 .movie-info {
     margin: 1rem 0 1rem 9rem;
+}
+
+section h2 {
+    margin: 3rem;
+}
+
+section p {
+    margin: 3rem;
 }

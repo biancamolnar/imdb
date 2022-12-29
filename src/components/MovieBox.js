@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+
 const API_IMG = "https://image.tmdb.org/t/p/w500/";
+
 
 const MovieBox = ({
   original_title,
@@ -10,7 +12,6 @@ const MovieBox = ({
   overview,
   id,
   addToRecentlyViewed,
-  removeFromRecentlyViewed,
 }) => {
   const [viewed, setViewed] = useState(false);
 

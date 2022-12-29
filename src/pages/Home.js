@@ -7,22 +7,46 @@ import MovieBox from "../components/MovieBox";
 import { Link } from "react-router-dom";
 import RecentlyViewed from "../components/RecentlyViewed";
 
-const API_URL =
+const popularUrl =
   "https://api.themoviedb.org/3/movie/popular?api_key=059bbea7bdbdf6c61c395be560b8abfd";
+const upcomingUrl =
+  "https://api.themoviedb.org/3/movie/upcoming?api_key=059bbea7bdbdf6c61c395be560b8abfd";
+const topRatedUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=059bbea7bdbdf6c61c395be560b8abfd"
+
 
 function Home({ recentlyViewedMovies, addToRecentlyViewed }) {
-  const [movies, setMovies] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch(API_URL)
+    fetch(popularUrl)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setMovies(data.results);
+        setPopularMovies(data.results);
       });
   }, []);
 
+  useEffect(() => {
+    fetch(upcomingUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUpcomingMovies(data.results);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(topRatedUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setTopRatedMovies(data.results);
+      });
+  }, []);
   const searchMovie = async (e) => {
     e.preventDefault();
     console.log("Searching");
@@ -32,7 +56,7 @@ function Home({ recentlyViewedMovies, addToRecentlyViewed }) {
       const res = await fetch(url);
       const data = await res.json();
       console.log(data);
-      setMovies(data.results);
+      setSearchResult(data.results);
     } catch {
       console.log(e);
     }
@@ -46,14 +70,15 @@ function Home({ recentlyViewedMovies, addToRecentlyViewed }) {
     <>
       <Navbar>
         <div className="nav">
-          <Link to="/">
-            <img
-              src={logo}
-              alt="movie db logo"
-              className="logo"
-              style={{ width: "10%" }}
-            ></img>
-          </Link>
+        <Link to="/">
+  <img
+    src={logo}
+    alt="movie db logo"
+    className="logo"
+    style={{ width: "10%" }}
+    onClick={() => setSearchResult([])}
+  ></img>
+</Link>
           <Form className="search-form" onSubmit={searchMovie}>
             <FormControl
               type="search"
@@ -72,20 +97,56 @@ function Home({ recentlyViewedMovies, addToRecentlyViewed }) {
       </Navbar>
 
       <div className="container">
-        <div className="grid">
-          {movies.map((movieReq) => (
-            <MovieBox
-              key={movieReq.id}
-              {...movieReq}
-              addToRecentlyViewed={addToRecentlyViewed}
-            />
-          ))}
-        </div>
+        {searchResult.length === 0 ? (
+          <>
+            <h1>Popular</h1>
+            <div className="grid">
+              {popularMovies.map((movieReq) => (
+                <MovieBox
+                  key={movieReq.id}
+                  {...movieReq}
+                  addToRecentlyViewed={addToRecentlyViewed}
+                />
+              ))}
+            </div>
+            <h1>Upcoming</h1>
+            <div className="grid">
+              {upcomingMovies.map((movieReq) => (
+                <MovieBox
+                  key={movieReq.id}
+                  {...movieReq}
+                  addToRecentlyViewed={addToRecentlyViewed}
+                />
+              ))}
+            </div>
+            <h1>Top Rated</h1>
+            <div className="grid">
+              {topRatedMovies.map((movieReq) => (
+                <MovieBox
+                  key={movieReq.id}
+                  {...movieReq}
+                  addToRecentlyViewed={addToRecentlyViewed}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <h1>Search Results</h1>
+            <div className="grid">
+              {searchResult.map((movieReq) => (
+                <MovieBox
+                  key={movieReq.id}
+                  {...movieReq}
+                  addToRecentlyViewed={addToRecentlyViewed}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
-      <RecentlyViewed
-        recentlyViewedMovies={recentlyViewedMovies}
-      />
+      <RecentlyViewed recentlyViewedMovies={recentlyViewedMovies} />
     </>
   );
-  }
-  export default Home;
+}
+export default Home;
