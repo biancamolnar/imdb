@@ -1,5 +1,3 @@
-API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=059bbea7bdbdf6c61c395be560b8abfd"
+Live demo: https://stellar-stroopwafel-37d56e.netlify.app/
 
-API_IMG = "https://image.tmdb.org/t/p/w500/"
-
-API_SEARCH = "https://api.themoviedb.org/3/search/movie?api_key=059bbea7bdbdf6c61c395be560b8abfd&query"
+![Skärmbild 2022-12-29 223025](https://user-images.githubusercontent.com/112082794/210012917-69164b5f-aab2-4f0f-8696-8397780ea668.png)
