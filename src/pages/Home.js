@@ -11,8 +11,8 @@ const popularUrl =
   "https://api.themoviedb.org/3/movie/popular?api_key=059bbea7bdbdf6c61c395be560b8abfd";
 const upcomingUrl =
   "https://api.themoviedb.org/3/movie/upcoming?api_key=059bbea7bdbdf6c61c395be560b8abfd";
-const topRatedUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=059bbea7bdbdf6c61c395be560b8abfd"
-
+const topRatedUrl =
+  "https://api.themoviedb.org/3/movie/top_rated?api_key=059bbea7bdbdf6c61c395be560b8abfd";
 
 function Home({ recentlyViewedMovies, addToRecentlyViewed }) {
   const [searchResult, setSearchResult] = useState([]);
@@ -70,15 +70,15 @@ function Home({ recentlyViewedMovies, addToRecentlyViewed }) {
     <>
       <Navbar>
         <div className="nav">
-        <Link to="/">
-  <img
-    src={logo}
-    alt="movie db logo"
-    className="logo"
-    style={{ width: "10%" }}
-    onClick={() => setSearchResult([])}
-  ></img>
-</Link>
+          <Link to="/">
+            <img
+              src={logo}
+              alt="movie db logo"
+              className="logo"
+              style={{ width: "10%" }}
+              onClick={() => setSearchResult([])}
+            ></img>
+          </Link>
           <Form className="search-form" onSubmit={searchMovie}>
             <FormControl
               type="search"

@@ -10,16 +10,18 @@ function App() {
     const updatedRecentlyViewedMovies = recentlyViewedMovies.filter(
       (viewedMovie) => viewedMovie.id !== movie.id
     );
-  
+
     setRecentlyViewedMovies([movie, ...updatedRecentlyViewedMovies]);
   };
-  
+
   return (
     <Router>
       <Routes>
         <Route path="/movie/:id" element={<SingleMovie />} />
-        <Route path="/" element={
-          <Home
+        <Route
+          path="/"
+          element={
+            <Home
               recentlyViewedMovies={recentlyViewedMovies}
               addToRecentlyViewed={addToRecentlyViewed}
             />
